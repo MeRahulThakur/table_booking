@@ -11,12 +11,12 @@
       </li>
       
       <li class="nav-item">
-        <%= link_to "New Booking", "users_path", class: "nav-link" %>
+        <%= link_to "New Booking", new_booking_path, class: "nav-link" %>
       </li>
 
       <% if logged_in? %>
-      <li class="nav-item">
-      <%= link_to "Log out", logout_path, class: "nav-link", method: :delete %>
+      <li class="nav-item mr-auto">
+      <%= link_to "#{current_user.name} Log out", logout_path, class: "nav-link", method: :delete %>
       </li>
       <% else %>
       <li class="nav-item">

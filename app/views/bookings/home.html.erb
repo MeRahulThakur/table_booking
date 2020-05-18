@@ -5,26 +5,23 @@
     <tr>
       <th scope="col">Table Num</th>
       <th scope="col">User</th>
+      <th scope="col">User email</th>
       <th scope="col">Start Time</th>
       <th scope="col">Finish Time</th>
       <th scope="col">Duration</th>
     </tr>
   </thead>
   <tbody>
+  <% @bookings.each do |booking| %>
     <tr>
       <th scope="row">1</th>
-      <td>Mark</td>
-      <td>24/09/2015 05:50</td>
-      <td>24/09/2015 06:05</td>
-      <td>15</td>
+      <td><%= booking.user.name %></td>
+      <td><%= booking.user.email %></td>
+      <td><%= booking.start_time.strftime("%d/%m/%Y %R") %></td>
+      <td><%= booking.end_time.strftime("%d/%m/%Y %R") %></td>
+      <td><%= booking.duration %></td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>@fat</td>
-    </tr>
+  <% end %>
   </tbody>
 </table>
 </div>

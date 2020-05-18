@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'pages#home'
+  root 'bookings#home'
+  resources :bookings, only: [:new, :create]
   get 'signup', to: 'users#new'
   resources :users, except: [:new]
   get 'login', to: 'sessions#new'
