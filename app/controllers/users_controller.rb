@@ -13,7 +13,7 @@ class UsersController < ApplicationController
         if @user.save
             session[:user_id] = @user.id
             flash[:notice] = "Welcome to the Ping pong booking #{@user.name}, you have successfully signed up"
-            redirect_to users_path
+            redirect_to root_path
         else
             render 'new'
         end
@@ -21,6 +21,6 @@ class UsersController < ApplicationController
 
     private
       def user_params
-        params.require(:user).permit(:name, :email, :password)
+        params.require(:user).permit(:name, :email, :password, :password_confirmation)
       end
 end

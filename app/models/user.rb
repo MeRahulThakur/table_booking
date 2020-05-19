@@ -10,5 +10,8 @@ class User < ApplicationRecord
                         format: { with: VALID_EMAIL_REGEX }
     validates :password, presence: true, 
                         length: {minimum: 8}
+    validates_presence_of :password_confirmation,presence: true, 
+                        length: {minimum: 8}, :if => :password_digest_changed?
+
     has_secure_password
 end
