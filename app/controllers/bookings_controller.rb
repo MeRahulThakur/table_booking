@@ -26,7 +26,6 @@ class BookingsController < ApplicationController
         if !@last_booking.nil?
             timediff = ((Time.parse(@booking.start_time.to_s)-Time.parse(@last_booking.end_time.to_s))/60).to_i
         end
-        byebug
         if (!timediff.nil? && timediff.abs <= 60 )
             flash[:alert] = "Minimun interval of 1 hour between two bookings for the same user"
             render 'new'
