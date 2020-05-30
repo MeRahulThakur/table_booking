@@ -8,21 +8,21 @@
                 <div class="form-group row">
                     <%= f.label :table_no, class: "col-4 col-form-label text-light" %><br/>
                     <div class="col-8">
-                        <%= f.number_field :table_no, class: "form-control shadow rounded", value: 1, disabled: true %>
+                        <%= f.number_field :table_no, class: "form-control shadow rounded", value: 1, readonly: true %>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <%= f.label "Start Time (DD/MM/YYYY HH:MM)", class: "col-4 col-form-label text-light" %><br/>
                     <div class="col-8">
-                        <%= f.datetime_field :start_time, class: "form-control shadow rounded" %>
+                        <%= f.datetime_field :start_time, class: "form-control shadow rounded", required: true %>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <%= f.label "Duration (in Minutes)", class: "col-4 col-form-label text-light" %><br/>
                     <div class="col-8">
-                        <%= f.number_field :duration, class: "form-control shadow rounded", min:10, max: 60%>
+                        <%= f.number_field :duration, class: "form-control shadow rounded", min:10, max: 60, required: true%>
                     </div>
                 </div>
 

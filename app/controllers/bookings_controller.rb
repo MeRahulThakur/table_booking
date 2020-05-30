@@ -10,29 +10,9 @@ class BookingsController < ApplicationController
     end
 
     def create
-        require 'date'
         @booking = Booking.new(booking_params)
-        @booking.table_no = 1
-        @booking.end_time = @booking.start_time + @booking.duration.minutes
         @booking.user = current_user
-
-        #check if booking with same date and same time
-        between_start = @booking.start_time.strftime("%Y-%m-%d %T")
-        between_end = @booking.end_time.strftime("%Y-%m-%d %T")
-        @advance_booking = Booking.where("(start_time BETWEEN '#{between_start}' AND '#{between_end}') OR (end_time BETWEEN '#{between_start}' AND '#{between_end}')")
-        #onehourcheckbyself
-        @last_booking = Booking.where("user_id = #{@booking.user.id}").last
-        if !@last_booking.nil?
-            timediff = ((Time.parse(@booking.start_time.to_s)-Time.parse(@last_booking.end_time.to_s))/60).to_i
-            timediff2 = ((Time.parse(@booking.start_time.to_s)-Time.parse(@last_booking.start_time.to_s))/60).to_i
-        end
-        if (!@last_booking.nil? && (timediff.abs <= 60 || timediff2.abs <= 60 ))
-            flash[:alert] = "Minimun interval of 1 hour between two bookings for the same user"
-            render 'new'
-        elsif !@advance_booking.empty?
-            flash[:alert] = "There already exists a booking on same date and time"
-            render 'new'
-        elsif @booking.save
+        if @booking.save
             flash[:notice] = "Booking was done successfully"
             redirect_to root_path
         else
@@ -42,6 +22,6 @@ class BookingsController < ApplicationController
 
     private
     def booking_params
-        params.require(:booking).permit(:start_time, :duration)
+        params.require(:booking).permit(:table_no, :start_time, :duration)
     end
 end

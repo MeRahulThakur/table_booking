@@ -14,12 +14,12 @@
   <tbody>
   <% @bookings.each do |booking| %>
     <tr>
-      <th scope="row">1</th>
+      <td><%= booking.table_no %></td>
       <td><%= booking.user.name %></td>
       <td><%= booking.user.email %></td>
       <td><%= booking.start_time.strftime("%d/%m/%Y %R") %></td>
       <td><%= booking.end_time.strftime("%d/%m/%Y %R") %></td>
-      <td><%= booking.duration %></td>
+      <td><%= booking.booking_duration %></td>
     </tr>
   <% end %>
   </tbody>
