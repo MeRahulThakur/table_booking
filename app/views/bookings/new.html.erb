@@ -6,9 +6,9 @@
             <%= form_with(model: @booking,class: "shadow p-3 mb-3 bg-info rounded", local: true) do |f| %>
 
                 <div class="form-group row">
-                    <%= f.label :table_no, class: "col-4 col-form-label text-light" %><br/>
+                    <%= f.label :table_id, class: "col-4 col-form-label text-light" %><br/>
                     <div class="col-8">
-                        <%= f.number_field :table_no, class: "form-control shadow rounded", value: 1, readonly: true %>
+                         <%= f.select :table_id, Table.all.collect {|p| [ p.id] },:prompt => 'Select Table', class: "form-control shadow rounded" %>
                     </div>
                 </div>
 

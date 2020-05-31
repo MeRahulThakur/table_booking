@@ -1,8 +1,8 @@
 class Booking < ApplicationRecord
     belongs_to :user
+    belongs_to :table
     validates :user, presence: true
-    validates :table_no, presence: true, 
-                        length: {minimum: 1, maximum: 1}
+    validates :table, presence: true
     validates :start_time, presence: true
     validates :end_time, presence: true
     validates :duration, presence: true, :numericality => { :greater_than_or_equal_to => 10, :less_than_or_equal_to => 60, :message => "Duration Should be Betweem 10 & 60 minutes"}
@@ -22,7 +22,7 @@ class Booking < ApplicationRecord
     end
      
     def set_end_time
-        set_start_time
+       set_start_time
        self.end_time = self.start_time + self.duration.to_i.minutes
     end
    
@@ -33,7 +33,7 @@ class Booking < ApplicationRecord
     end
    
     def overlapping_booking_check
-       if (Booking.where("table_no = ? AND (start_time <= ? and end_time >= ?)", self.table_no, self.end_time, self.start_time).count > 0)
+       if (Booking.where("table_id = ? AND (start_time <= ? and end_time >= ?)", self.table_id, self.end_time, self.start_time).count > 0)
          errors.add :table, "not available in the given time interval due to overlap with other Booking."
        end
     end
